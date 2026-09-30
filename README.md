@@ -147,32 +147,6 @@ Production execution policy is fixed in code. The supported runtime diagnostics 
 
 These controls observe or schedule supported work; they do not select alternate inference algorithms.
 
-## Validation
-
-Run the release unit/static suite:
-
-```bash
-tests/run_python_tests.sh
-```
-
-Build and smoke-test a backend:
-
-```bash
-tests/build.sh cpu
-tests/smoke.sh cpu path/to/model.moge
-```
-
-The RX 7900 XTX / RADV NAVI31 release-validation command is:
-
-```bash
-tests/vulkan_release_test.sh \
-  --reference ../v3_q8.moge ../emiru.jpg ../moge-output.zip
-```
-
-It builds the release Vulkan backend, exercises cached-plan smoke paths, checks host contention, runs an 11-sample benchmark by default, verifies golden geometry output, captures an operator profile and GPU state, and writes a sanitized `moge-vulkan-test-results.tar.gz` beside the source tree.
-
-The release Vulkan policy was validated at 640x480 with golden-reference parity and repeated medians in the established ~1.16–1.19 s range on the target RX 7900 XTX / RADV NAVI31. Use the command above for release regression checks on that target.
-
 ## Install / CMake consumer
 
 ```bash
