@@ -1,13 +1,13 @@
 # Credits
 
-moge-ggml 0.4.2 was brought to release through iterative implementation, profiling, hardware validation, and backend tuning.
-
 ## Project
 
-- **Kenji8965** — project direction, target definition, hardware validation, performance steering, release acceptance, and testing across Apple Metal and AMD Vulkan targets.
-- **ChatGPT 5.6 Sol (OpenAI)** — primary programming and implementation assistance for the 0.4.2 development cycle, including code changes, refactoring, test harnesses, backend optimization work, release cleanup, documentation, and packaging support.
+- **Kenji8965** — project direction, target definition, human testing, hardware validation, performance steering, release acceptance, and repository maintenance.
+- **ChatGPT 5.6 Sol (OpenAI)** — programming and implementation assistance for the 0.4.2 development cycle, including code changes, refactoring, testing infrastructure, backend optimization, release cleanup, documentation, and packaging support.
 
-The project owner retains responsibility for project direction, acceptance decisions, release publication, and the repository's licensing choices. Use of AI-assisted programming does not transfer copyright in this project to OpenAI or ChatGPT.
+Copyright in this project remains with **Kenji8965**. AI-assisted programming does not transfer project copyright to OpenAI or ChatGPT.
+
+The software is provided under the MIT License **“AS IS”**, without warranty of any kind. Use of the software and its outputs is at your own risk. See [LICENSE](LICENSE) for the complete license terms.
 
 ## MoGe research
 

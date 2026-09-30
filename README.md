@@ -1,5 +1,13 @@
 # moge-ggml
 
+Copyright © 2026 **Kenji8965**.
+
+**Programming and implementation assistance:** ChatGPT 5.6 Sol (OpenAI)
+
+**Human testing, validation, and release acceptance:** Kenji8965
+
+This software is provided under the MIT License **“AS IS”**, without warranty of any kind. Use of the software and its outputs is at your own risk. See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the complete terms and third-party notices.
+
 **Release: 0.4.2 · Public API: v1 · Bundled ggml: 0.25.3**
 
 Native MoGe inference on ggml 0.25.3 with CPU, Metal, and Vulkan backends. The release exposes a small C++17 API, a stable C ABI, `moge-cli`, and checkpoint conversion tools. Backend execution policy is fixed internally; applications do not need tuning environment variables.

@@ -1,3 +1,9 @@
+// Copyright (c) 2026 Kenji8965
+// SPDX-License-Identifier: MIT
+// Programming and implementation assistance: ChatGPT 5.6 Sol (OpenAI)
+// Human testing, validation, and release acceptance: Kenji8965
+// Provided "AS IS"; use at your own risk. See LICENSE.
+
 #pragma once
 #include <cstdint>
 #include <cstring>
