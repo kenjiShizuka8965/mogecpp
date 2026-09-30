@@ -1,0 +1,23 @@
+build*/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.mogg
+*.pt
+*.pth
+*.safetensors
+.DS_Store
+test-results/
+moge-test-results*.zip
+calibration/*.mogi
+calibration/*.mogi.json
+
+# Local IDE/editor state
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local install/package staging
+install-*/
+dist/

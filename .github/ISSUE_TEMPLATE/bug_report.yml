@@ -1,0 +1,53 @@
+name: Bug report
+description: Report a reproducible moge-ggml problem
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please include enough environment and model information to reproduce the issue. Do not attach model weights unless you have the right to redistribute them.
+  - type: input
+    id: version
+    attributes:
+      label: moge-ggml version / commit
+      placeholder: 0.4.2 or git commit
+    validations:
+      required: true
+  - type: dropdown
+    id: backend
+    attributes:
+      label: Backend
+      options:
+        - CPU
+        - Metal
+        - Vulkan
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, CPU/GPU, driver/runtime versions, compiler and CMake version.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: Exact command and minimal steps needed to reproduce.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior / logs
+      render: shell
+    validations:
+      required: true

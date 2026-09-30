@@ -1,0 +1,61 @@
+#version 450
+
+#include "types.glsl"
+#include "generic_binary_head.glsl"
+
+#ifndef LOCAL_SIZE_X
+#define LOCAL_SIZE_X 512
+#endif
+#ifndef ELEMENTS_PER_THREAD
+#define ELEMENTS_PER_THREAD 1
+#endif
+
+layout(local_size_x = LOCAL_SIZE_X, local_size_y = 1, local_size_z = 1) in;
+
+void main() {
+    const uint i00_base = gl_GlobalInvocationID.x * ELEMENTS_PER_THREAD;
+
+    if (i00_base >= p.ne00) {
+        return;
+    }
+
+    uint gid_z = gl_GlobalInvocationID.z;
+    while (gid_z < p.ne11 * p.ne12) {
+        uint gid_y = gl_GlobalInvocationID.y;
+        while (gid_y < p.ne10) {
+            const uint i10 = gid_y;
+            const uint i11 = gid_z / p.ne12;
+            const uint i12 = gid_z % p.ne12;
+
+            const uint i01 = data_b[get_boffset() + i10*p.nb10 + i11*p.nb11 + i12*p.nb12];
+
+            const uint d_offset = get_doffset() + i10*p.nb21 + i11*p.nb22 + i12*p.nb23;
+            // MoGe sparse topology uses source-row count as a missing-neighbor
+            // sentinel. Defining out-of-range GET_ROWS as zero keeps valid ggml
+            // semantics unchanged while avoiding an explicit zero-row tensor on
+            // Vulkan. Other backends continue to use the padded-row fallback.
+            for (uint e = 0; e < ELEMENTS_PER_THREAD; ++e) {
+                const uint i00 = i00_base + e;
+                if (i00 >= p.ne00) {
+                    break;
+                }
+                TEMP_TYPE v = TEMP_TYPE(0);
+                if (i01 < p.ne01) {
+                    const uint a_offset = get_aoffset() + i01*p.nb01 + i11*p.nb02 + i12*p.nb03;
+#if defined(DATA_A_BF16)
+                    v = TEMP_TYPE(bf16_to_fp32(data_a[a_offset + i00]));
+#else
+                    v = TEMP_TYPE(data_a[a_offset + i00]);
+#endif
+                }
+#ifndef OPTIMIZATION_ERROR_WORKAROUND
+                data_d[d_offset + i00] = D_TYPE(v);
+#else
+                data_d[d_offset + i00] = D_TYPE(v);
+#endif
+            }
+            gid_y += gl_WorkGroupSize.y * gl_NumWorkGroups.y;
+        }
+        gid_z += gl_WorkGroupSize.z * gl_NumWorkGroups.z;
+    }
+}
